@@ -37,7 +37,6 @@ class GroupsController < ApplicationController
       flash[:notice] = "Group updated success!"
       redirect_to groups_path
     else
-      flash[:warning] = "Group updated failed!"
       render :edit
     end
 
