@@ -1,0 +1,20 @@
+<div class="col-md-12">
+  <table class="table">
+    <thead>
+      <th>#</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Creator</th>
+    </thead>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+        <td>#</td>
+        <td><%= group.title %></td>
+        <td><%= group.description %></td>
+        <td><%= group.user.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
