@@ -21,20 +21,26 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    @group.save
-    flash[:notice] = "Group created!"
-    redirect_to groups_path
+    if @group.save
+      flash[:notice] = "Group created!"
+      redirect_to groups_path
+    else
+      render :new
+    end
   end
 
   def update
+
     @group = Group.find(params[:id])
 
     if @group.update(group_params)
       flash[:notice] = "Group updated success!"
+      redirect_to groups_path
     else
       flash[:warning] = "Group updated failed!"
+      render :edit
     end
-    redirect_to groups_path
+
   end
 
   def show
