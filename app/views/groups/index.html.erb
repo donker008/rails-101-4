@@ -1,0 +1,22 @@
+<div class="col-md-12">
+  <table class="table">
+    <thead>
+      <th> # </th>
+      <th> Title </th>
+      <th> Description </th>
+      <th colspan="colum-span-2">  </th>
+    </thead>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+        <td> # </td>
+        <td> <%= group.title %></td>
+        <td> <%= group.description %></td>
+        <td> <%= link_to("Edit", edit_group_path(group)) %></td>
+        <td> <%= link_to("Delete",group_path(group), method: :delete, data: {confirm: "Are you sure?"}) %></td>
+
+        </tr>
+      <% end  %>
+    </tbody>
+  </table>
+</div>
