@@ -1,9 +1,12 @@
 <div class="col-md-12">
+  
+  <%= link_to("Write a post",new_group_post_path(@group), class: "btn btn-primary pull-right ")%>
   <% if current_user == @group.user %>
   <div class="group">
     <%= link_to("Edit",edit_group_path(@group), class: "btn btn-primary pull-right ")%>
   </div>
   <% end %>
+
   <h2><%= @group.title%></h2>
   <p><%= @group.description%></p>
 </div>
