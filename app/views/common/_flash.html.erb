@@ -1,0 +1,8 @@
+<% if flash.any? %>
+  <% flash_using_message(flash).each do |key, msg| %>
+  <div class="alert alert-dismissable alert-<%= flash_class(key) %>" >
+    <button class="close" data-dismiss="alert">x</button>
+    <%= msg %>
+  </div>
+  <% end %>
+<% end %>
