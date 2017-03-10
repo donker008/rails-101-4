@@ -11,6 +11,7 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+
     @group = Group.find(params[:id])
     @group.destroy
     flash[:alert] = "Group deleted!"
@@ -25,6 +26,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.user = current_user
     if @group.save
+      current_user.join!(@group)
       flash[:notice] = "Group created!"
       redirect_to groups_path
     else
@@ -48,6 +50,28 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @posts = @group.posts.recent.paginate(:page =>params[:page], :per_page => 6)
+  end
+
+  def join
+    @group = Group.find(params[:id])
+    if !current_user.is_member_of?(@group)
+      current_user.join!(@group)
+    else
+      flash[:warnin] = "You already joined!"
+    end
+
+    redirect_to group_path(@group)
+  end
+
+  def quit
+    @group = Group.find(params[:id])
+    if current_user.is_member_of?(@group)
+      current_user.quit!(@group)
+    else
+      flash[:warnin] = "You hasn't joined the group!"
+    end
+
+    redirect_to group_path(@group)
   end
 
   private
